@@ -44,17 +44,18 @@ const Header = () => {
     }
   };
 
-  const lastKnownScrollPosition = useRef(null);
   const headerRef = useRef(null);
 
   useEffect(() => {
+    let lastKnownScrollPosition = window.scrollY;
+      
     const handleScroll = (e) => {
-      if (window.scrollY >= lastKnownScrollPosition.current) {
+      if (window.scrollY >= lastKnownScrollPosition) {
         headerRef.current.style.transform=("translateY(-200px)")
       } else {
         headerRef.current.style.transform=("translateY(0)")
       }
-      lastKnownScrollPosition.current = window.scrollY;
+      lastKnownScrollPosition = window.scrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
